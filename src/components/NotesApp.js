@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {AppBar} from 'material-ui';
 
-import {addNoteAction, deleteNoteAction} from '../redux/actions'
+import {addNoteAction, deleteNoteAction, fetchNotesAsync} from '../redux/actions'
 import AddNote from './AddNote';
 import NoteCard from './NoteCard';
 
@@ -19,6 +20,10 @@ const styles = {
 };
 
 class NotesApp extends Component {
+
+    componentDidMount() {
+        this.props.fetchNotesAsync();
+    }
 
     renderAddedNotes() {
         const {notes, deleteNote} = this.props;
@@ -38,7 +43,9 @@ class NotesApp extends Component {
         const {addNote} = this.props;
         return (
             <div style={styles.container}>
-                <h3>A simple notes example</h3>
+                <AppBar
+                    title="RNotes"
+                />
                 <AddNote onAddNote={addNote}/>
                 <div style={styles.notes}>
                     {this.renderAddedNotes()}
@@ -55,6 +62,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         addNote: (note) => dispatch(addNoteAction(note)),
         deleteNote: (noteId) => dispatch(deleteNoteAction(noteId)),
+        fetchNotesAsync: () => dispatch(fetchNotesAsync()),
     }
 };
 

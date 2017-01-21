@@ -1,4 +1,4 @@
-import {ADD_NOTE, DELETE_NOTE} from './actions';
+import {ADD_NOTE, DELETE_NOTE, FETCH_NOTES} from './actions';
 
 const initialState = {
     notes: [],
@@ -16,6 +16,8 @@ function noteListReducer(state = initialState.notes, action) {
             return [note, ...state];
         case DELETE_NOTE:
             return state.filter((n) => n.id !== action.id);
+        case FETCH_NOTES:
+            return [...action.notes];
         default:
             return state
     }

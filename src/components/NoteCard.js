@@ -1,5 +1,5 @@
 import React from 'react';
-import {IconButton, Card, CardActions, CardTitle} from 'material-ui';
+import {IconButton, Card, CardActions, CardTitle, Divider} from 'material-ui';
 import {amber500} from 'material-ui/styles/colors';
 
 
@@ -17,6 +17,7 @@ const styles = {
 const NoteCard = ({id, title, content, onDone}) =>
     <Card style={styles.container}>
         <CardTitle title={title} subtitle={content}/>
+        <Divider />
         <CardActions>
             <IconButton
                 iconClassName="material-icons"
