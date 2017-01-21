@@ -11,7 +11,7 @@ const NoteCard = ({id, title, content, onDone}) =>
     <Card style={style}>
         <CardTitle title={title} subtitle={content}/>
         <CardActions>
-            <FlatButton label="Done" primary={true} onClick={() => onDone({id})} />
+            <FlatButton label="Done" primary={true} onClick={() => onDone(id)} />
         </CardActions>
     </Card>
     ;

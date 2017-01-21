@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
+import {addNoteAction, deleteNoteAction} from '../redux/actions'
 import AddNote from './AddNote';
 import NoteCard from './NoteCard';
 
@@ -19,44 +21,28 @@ const styles = {
 class NotesApp extends Component {
     constructor(props){
         super(props);
-
-        this.state = {noteList: []};
-
-        this.addNote = this.addNote.bind(this);
-        this.onDone = this.onDone.bind(this);
-    }
-
-    addNote({title, note, id}) {
-        const noteList = [{title, note, id}, ...this.state.noteList];
-        this.setState({noteList});
-
-        console.log(this.state);
-    }
-
-    onDone({id}) {
-        const noteList = this.state.noteList.filter((n) => n.id !== id);
-        this.setState({noteList});
     }
 
     renderAddedNotes() {
-        const {noteList} = this.state;
-        return noteList.map((i) =>
+        const {notes, deleteNote} = this.props;
+        return notes.map((i) =>
                     <NoteCard
                         key={i.id}
                         id={i.id}
                         title={i.title}
                         content={i.note}
-                        onDone={this.onDone}
+                        onDone={(id) => deleteNote(id)}
                     />
                 )
         ;
     }
 
     render() {
+        const {addNote} = this.props;
         return (
             <div style={styles.container}>
                 <h3>A simple notes example</h3>
-                <AddNote onAddNote={this.addNote}/>
+                <AddNote onAddNote={addNote}/>
                 <div style={styles.notes}>
                     {this.renderAddedNotes()}
                 </div>
@@ -65,4 +51,14 @@ class NotesApp extends Component {
     }
 }
 
-export default NotesApp;
+const mapStateToProps = (state) => {
+    return {notes: state.notes}
+};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addNote: (note) => dispatch(addNoteAction(note)),
+        deleteNote: (noteId) => dispatch(deleteNoteAction(noteId)),
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NotesApp);

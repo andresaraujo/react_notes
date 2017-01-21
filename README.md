@@ -1,6 +1,6 @@
-A simple TODO/Notes example
+A react example of a notes appliction using redux
 
 
 Todo:
-- better layout
-- user redux for app state management
+- Better layout
+- ~~Use redux for app state management~~
