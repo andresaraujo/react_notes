@@ -1,17 +1,30 @@
-import React, {Component} from 'react';
-import {FlatButton, Card, CardActions, CardTitle} from 'material-ui';
+import React from 'react';
+import {IconButton, Card, CardActions, CardTitle} from 'material-ui';
+import {amber500} from 'material-ui/styles/colors';
 
-const style = {
-    width: '280px',
-    marginTop: '20px',
-    marginLeft: '20px'
+
+const styles = {
+    container: {
+        width: '280px',
+        marginTop: '20px',
+        marginLeft: '20px'
+    },
+    icon: {
+        color: amber500,
+    }
 };
 
 const NoteCard = ({id, title, content, onDone}) =>
-    <Card style={style}>
+    <Card style={styles.container}>
         <CardTitle title={title} subtitle={content}/>
         <CardActions>
-            <FlatButton label="Done" primary={true} onClick={() => onDone(id)} />
+            <IconButton
+                iconClassName="material-icons"
+                iconStyle={styles.icon}
+                onClick={() => onDone(id)}
+            >
+                delete
+            </IconButton>
         </CardActions>
     </Card>
     ;

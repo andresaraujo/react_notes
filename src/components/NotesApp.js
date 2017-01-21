@@ -19,9 +19,6 @@ const styles = {
 };
 
 class NotesApp extends Component {
-    constructor(props){
-        super(props);
-    }
 
     renderAddedNotes() {
         const {notes, deleteNote} = this.props;
