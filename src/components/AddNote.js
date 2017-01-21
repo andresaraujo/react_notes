@@ -7,8 +7,6 @@ const container = {
     marginBottom: '20px',
 };
 
-let id = 0;
-
 class AddNote extends Component {
     constructor(props) {
         super(props);
@@ -22,7 +20,7 @@ class AddNote extends Component {
         const {title, note} = this.state;
 
         if(title || note) {
-            onAddNote({title, note, id: ++id});
+            onAddNote({title, note});
             this.setState({title: '', note: ''});
         }
     }
